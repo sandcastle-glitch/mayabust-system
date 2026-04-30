@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="header-section">
+    <h1>Data Logs</h1>
+    <p>Detailed historical record of Mayabust activation events.</p>
+</div>
+
+<div class="log-card">
+    <div class="table-responsive">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for log in activations %}
+                <tr>
+                    <td>{{ log.timestamp }}</td>
+
+                    <td>
+                        <span class="badge badge-success">Success</span>
+                    </td>
+
+                    <td>
+                        <a href="{{ url_for('log_details', log_id=log.id) }}" class="menu-btn">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% endblock %}

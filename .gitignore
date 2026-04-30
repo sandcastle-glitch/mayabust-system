@@ -1,0 +1,7 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+database.sqlite
+.env
+.vscode/git rm --cached database.sqlite

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="header">
+    <h1>System Overview</h1>
+    <p>Overview of Mayabust's daily performance.</p>
+</div>
+
+<div class="kpi-container">
+    <div class="card">
+        <div class="card-header">TOTAL ACTIVATION: <i class="fa fa-cog"></i></div>
+        <div class="card-body">
+            <span class="value">{{ total_count }}</span>
+            <span class="trend-up">↑</span>
+        </div>
+    </div>
+<div class="card">
+    <div class="card-header">
+        <span>Bird Activity</span>
+        <i class="fa fa-dove"></i>
+    </div>
+    <div class="card-body">
+        <span class="status">Normal</span>
+    </div>
+</div>
+
+    <div class="card">
+        <div class="card-header">TOTAL DURATION: <i class="fa fa-clock"></i></div>
+        <div class="card-body">
+            <span class="value">{{ total_duration }}</span>
+            <span class="sub-value">({{ (total_duration/60)|round(1) }}min)</span>
+        </div>
+    </div>
+</div>
+
+<div class="chart-section">
+    <h3>Hourly Activation Pattern</h3>
+    <div id="heatmap"></div>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    var graphs = {{ graphJSON | safe }};
+    Plotly.newPlot('heatmap', graphs.data, graphs.layout {
+    responsive: true,
+    displayModeBar: false
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="header-section">
+    <h1>Activation Details</h1>
+    <p>Full record for activation #{{ log.id }}.</p>
+</div>
+
+<div class="log-card details-page">
+    <div class="details-grid">
+        <div>
+            <span class="detail-label">Timestamp</span>
+            <h3>{{ log.timestamp }}</h3>
+        </div>
+
+        <div>
+            <span class="detail-label">Status</span>
+            {% if log.duration > 20 %}
+                <span class="badge badge-warning">Extended</span>
+            {% else %}
+                <span class="badge badge-success">Success</span>
+            {% endif %}
+        </div>
+
+        <div>
+            <span class="detail-label">Detection Source</span>
+            <h3>{{ log.detection_type }}</h3>
+        </div>
+
+        <div>
+            <span class="detail-label">Duration</span>
+            <h3>{{ log.duration }}s</h3>
+        </div>
+
+        <div>
+            <span class="detail-label">Action Taken</span>
+            <h3>{{ log.action_taken }}</h3>
+        </div>
+    </div>
+
+    <div class="captured-section">
+        <h3>Captured Bird</h3>
+
+        {% if log.image_path %}
+            <img src="{{ log.image_path }}" class="bird-img-large" alt="Captured Bird">
+        {% else %}
+            <div class="empty-image">
+                <i class="fa fa-image"></i>
+                <p>No captured bird image available.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('logs') }}" class="back-btn">
+        <i class="fa fa-arrow-left"></i> Back to Logs
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayabust System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Mayabust</h2>
+            <p>DEVICE ONLINE</p>
+        </div>
+        <nav>
+           <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+    <i class="fa fa-list-alt"></i> Overview
+</a>
+
+<a href="/logs" class="{% if request.path == '/logs' %}active{% endif %}">
+    <i class="fa fa-database"></i> Data Logs
+</a>
+        </nav>
+    </div>
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
