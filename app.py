@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
@@ -10,20 +10,7 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    conn = get_db_connection()
-
-    total_count = conn.execute('SELECT COUNT(*) FROM activations').fetchone()[0]
-    total_duration = conn.execute('SELECT SUM(duration) FROM activations').fetchone()[0] or 0
-    activations = conn.execute('SELECT * FROM activations ORDER BY timestamp DESC').fetchall()
-
-    conn.close()
-
-    return render_template(
-        'overview.html',
-        total_count=total_count,
-        total_duration=total_duration,
-        activations=activations
-    )
+    return redirect(url_for('logs'))
 
 @app.route('/logs')
 def logs():
